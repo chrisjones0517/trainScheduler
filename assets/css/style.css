@@ -1,0 +1,10 @@
+.change {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00ff00;
+    margin-left: 2rem;
+}
+
+.remove:hover, .change:hover {
+    cursor: pointer;
+}
