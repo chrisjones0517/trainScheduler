@@ -18,7 +18,7 @@ $(document).ready(function () {
     }, 5000);
 
     $('#formSubmit').on('click', function (e) {
-        
+
         e.preventDefault();
         var nameInput = $('#nameInput').val();
         var destinationInput = $('#destinationInput').val();
@@ -59,31 +59,23 @@ $(document).ready(function () {
                 var k = keys[i];
                 var first = trains[k].firstTrainTime;
                 var freq = trains[k].frequency;
-                var crntTimeInMin = parseInt(moment().format('H HH')) * 60 + parseInt(moment().format('mm'));
-                var firstInMin = moment(first, 'hh mm A').format('H') * 60 + parseInt(moment(first, 'hh:mm A').format('mm'));
-                var nextTrainInMin = (Math.ceil((crntTimeInMin - firstInMin) / freq) * freq) + firstInMin;
-                var minutesAway = nextTrainInMin - crntTimeInMin;
-                if (firstInMin > crntTimeInMin) {
-                    nextTrainInMin = firstInMin;
-                    minutesAway = firstInMin - crntTimeInMin;
-                }
-                //       console.log(firstInMin);
-                var nextTrainStr = Math.floor(nextTrainInMin / 60).toString() + (nextTrainInMin % 60).toString();
-                var nextTrainArr = moment(nextTrainStr, 'hhmm').format('HH:mm A');
-                var arr = nextTrainArr.split(':');
-                if (parseInt(arr[0]) > 12) {
-                    var convert = parseInt(arr[0]) - 12;
-                    var str = convert.toString();
-                    arr.splice(0, 1, str, ':');
-                    var nextTrain = arr.join('');
-                }
 
+                // Time conversions begin
+
+                var firstTimeConverted = moment(first, 'hh:mm A').subtract(1, 'years');
+                var currentTime = moment();
+                var diffTime = moment().diff(moment(firstTimeConverted), 'minutes');
+                var tRemainder = diffTime % freq;
+                var minutesAway = freq - tRemainder;
+                var nextTrain = moment().add(minutesAway, 'minutes');
+                var nextTrainConverted = moment(nextTrain).format('hh:mm A');
+                
                 $('tbody').append(`
             <tr class="added">
                 <td>${trains[k].trainName}</td>
                 <td>${trains[k].destination}</td>
                 <td>${freq}</td>
-                <td>${nextTrain}</td> 
+                <td>${nextTrainConverted}</td> 
                 <td>${minutesAway}</td>
             </tr>
             `);
