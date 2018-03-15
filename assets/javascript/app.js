@@ -18,7 +18,7 @@ $(document).ready(function () {
     }, 5000);
 
     $('#formSubmit').on('click', function (e) {
-
+        
         e.preventDefault();
         var nameInput = $('#nameInput').val();
         var destinationInput = $('#destinationInput').val();
@@ -37,7 +37,7 @@ $(document).ready(function () {
             alert('You must enter a valid destination!');
         } else if (timeInput === '') {
             alert('You must enter a valid first train time!');
-        } else if (frequencyInput === '') {
+        } else if (frequencyInput === '' || parseInt(frequencyInput) > 1440 || parseInt(frequencyInput) <= 0) {
             alert('You must enter a valid train trip frequency!');
         } else {
             ref.push(data);
