@@ -38,7 +38,7 @@ $(document).ready(function () {
         } else if (timeInput === '') {
             alert('You must enter a valid first train time!');
         } else if (frequencyInput === '' || parseInt(frequencyInput) > 1440 || parseInt(frequencyInput) <= 0) {
-            alert('You must enter a valid train trip frequency!');
+            alert('You must enter a train trip frequency between 1 and 1439!');
         } else {
             ref.push(data);
 
