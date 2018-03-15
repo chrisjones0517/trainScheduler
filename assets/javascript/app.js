@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-    // Initialize Firebase
-    var firstTrainTime;
-    var minutesAway;
-    var futureMinutes = moment().minutes();
-    var currentMinutes = new Date().getTime();
-    minutesAway = 10;
-    var database;
     var config = {
         apiKey: "AIzaSyAgteNT3MXqRIEIKaWiLC7U6gObyVnUCIs",
         authDomain: "train-scheduler-fbf02.firebaseapp.com",
@@ -16,18 +9,14 @@ $(document).ready(function () {
         messagingSenderId: "822253192991"
     };
     firebase.initializeApp(config);
-    database = firebase.database();
-    var ref = database.ref('train data');
+    var database = firebase.database();
+    var ref = database.ref();
     ref.on('value', gotData, errData);
 
     setInterval(function () {
         ref.on('value', gotData, errData);
     }, 5000);
 
-    // Load train data from database to page
-    // setInterval(function() {
-    //     console.log('Time ran');
-    // }, 1000);
     $('#formSubmit').on('click', function (e) {
 
         e.preventDefault();
@@ -35,15 +24,13 @@ $(document).ready(function () {
         var destinationInput = $('#destinationInput').val();
         var timeInput = $('#timeInput').val();
         var frequencyInput = $('#frequencyInput').val();
-        var mutable = 'mutable';
         var data = {
             trainName: nameInput,
             destination: destinationInput,
             firstTrainTime: timeInput,
-            frequency: frequencyInput,
-            class: mutable
+            frequency: frequencyInput
         }
-        // console.log(data);
+
         if (nameInput === '') {
             alert('You must enter a valid train name!');
         } else if (destinationInput === '') {
@@ -53,26 +40,17 @@ $(document).ready(function () {
         } else if (frequencyInput === '') {
             alert('You must enter a valid train trip frequency!');
         } else {
-            //  Form tags
             ref.push(data);
+
             $('#nameInput').val('');
             $('#destinationInput').val('');
             $('#timeInput').val('');
             $('#frequencyInput').val('');
-
-
         }
-
-
     });
-
-    $(document).on('click','.remove', function() {
-        console.log('I ran!!!');
-    });
-
 
     function gotData(data) {
-        // console.log(data.val());
+
         if (data.val() !== null) {
             var trains = data.val();
             var keys = Object.keys(trains);
@@ -100,10 +78,6 @@ $(document).ready(function () {
                     var nextTrain = arr.join('');
                 }
 
-                //  console.log(nextTrain);
-
-
-
                 $('tbody').append(`
             <tr class="added">
                 <td>${trains[k].trainName}</td>
@@ -111,14 +85,8 @@ $(document).ready(function () {
                 <td>${freq}</td>
                 <td>${nextTrain}</td> 
                 <td>${minutesAway}</td>
-                <td><span class="remove">&#x274C</span><span class="change">+</span></td>
             </tr>
             `);
-
-                if (trains[k].class === 'mutable') {
-                    $('.added:last-child').addClass('mutable');
-                }
-
             }
         }
     }
@@ -127,6 +95,4 @@ $(document).ready(function () {
         console.log('Error!');
         console.log(err);
     }
-
-
 });

@@ -1,10 +1,11 @@
-.change {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #00ff00;
-    margin-left: 2rem;
+.jumbotron {
+    background-image: url('../images/bullet-train.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
-.remove:hover, .change:hover {
-    cursor: pointer;
+h1 {
+    font-size: 3.5rem;
+    text-shadow: 1px 1px #ff0000, -1px 1px #ff0000, 1px -1px #ff0000, -1px -1px #ff0000;
 }

@@ -14,11 +14,11 @@
 
 <body>
     <div class="container-fluid">
-        <div class="jumbotron">
-
+        <div class="jumbotron text-center">
+            <h1>Train Scheduler</h1>
         </div>
-        <div class="container">
-            <div class="container border border-primary">
+        <div class="container row mx-auto">
+            <div class="table-responsive border border-primary rounded mb-5 col-lg-7">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -27,33 +27,34 @@
                             <th scope="col">Frequency</th>
                             <th scope="col">Next Arrival</th>
                             <th scope="col">Minutes Away</th>
-                            <th scope="col">Delete/Change</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
             </div>
-            <form>
-                <div class="form-group">
-                    <label for="nameInput">Train Name</label>
-                    <input type="text" class="form-control" id="nameInput">
-                </div>
-                <div class="form-group">
-                    <label for="destinationInput">Destination</label>
-                    <input type="text" class="form-control" id="destinationInput">
-                </div>
-                <div class="form-group">
-                    <label for="timeInput">First Train Time (HH:MM - AM/PM)</label>
-                    <input type="time" class="form-control" id="timeInput">
-                </div>
-                <div class="form-group">
-                    <label for="frequencyInput">Frequency (min)</label>
-                    <input type="number" class="form-control" id="frequencyInput">
-                </div>
-                <button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
-            </form>
+            <div class="container border border-primary rounded mb-5 col-lg-4">
+                <form class="p-2">
+                    <div class="form-group">
+                        <label for="nameInput">Train Name</label>
+                        <input type="text" class="form-control" id="nameInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="destinationInput">Destination</label>
+                        <input type="text" class="form-control" id="destinationInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeInput">First Train Time (HH:MM - AM/PM)</label>
+                        <input type="time" class="form-control" id="timeInput">
+                    </div>
+                    <div class="form-group">
+                        <label for="frequencyInput">Frequency (min)</label>
+                        <input type="number" class="form-control" id="frequencyInput">
+                    </div>
+                    <button type="submit" id="formSubmit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
